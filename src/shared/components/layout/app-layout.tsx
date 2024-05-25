@@ -1,10 +1,11 @@
 import { Box, Button, Text } from "@mantine/core";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div>
-      {/* Header */}
+      {/* Header with navigation */}
       <header
         style={{
           borderBottom: "1px solid #ddd",
@@ -19,7 +20,25 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             gap: "20px",
           }}
         >
-          <h1> Portalgen </h1>
+          <h1>Portalgen</h1>
+          <Box>
+            {/* Navigation links */}
+            <Link to="/" style={{ margin: "0 10px", textDecoration: "none" }}>
+              Preference Questionaire
+            </Link>
+            <Link
+              to="/places"
+              style={{ margin: "0 10px", textDecoration: "none" }}
+            >
+              Browse Places
+            </Link>
+            <Link
+              to="/contact"
+              style={{ margin: "0 10px", textDecoration: "none" }}
+            >
+              Contact Us
+            </Link>
+          </Box>
         </Box>
       </header>
 
@@ -47,8 +66,7 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           textAlign: "center",
         }}
       >
-        {/* Add your footer content here */}
-        Trip Tailor &copy; 2024
+        Portalgen &copy; 2024
       </footer>
     </div>
   );
