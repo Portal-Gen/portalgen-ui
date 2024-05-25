@@ -2,6 +2,8 @@ import React from 'react'
 import {useForm, Controller} from 'react-hook-form'
 import { PlaceType } from '@/shared/enums/biz.enum'
 import { Button, Group, Pill, Text } from '@mantine/core'
+import { useUpdateUserPlacePreferencesMutation } from '@/api/hooks/user.hook'
+import { notifications } from '@mantine/notifications'
 
 const placeTypeOptions = Object.keys(PlaceType)
     .filter((key) => isNaN(Number(key)))
@@ -11,24 +13,41 @@ const placeTypeOptions = Object.keys(PlaceType)
     }))
 
 const FavouriteTypeForm = () => {
+    const updateUserPlacePreference = useUpdateUserPlacePreferencesMutation({
+        onSuccess: () => {
+            notifications.show({
+                title: 'Preferences Updated',
+                message: 'Your preferences have been updated',
+                color: 'blue',
+            })
+        },
+        onError: (error) => {
+            
+        }
+    });
+
     const {control, handleSubmit, watch, formState: {errors}} = useForm({
         defaultValues: {
             placeTypes: []
         }
     })
 
-    const onSubmit = (data) => {
+    const onUpdateUserPlacePreferences = (data) => {
         const preferences = placeTypeOptions.reduce((acc, option) => {
             acc[PlaceType[option.label]] = data.placeTypes.includes(option.label) ? 1 : 0;
             return acc;
         }, {})
-        console.log({preferences})
+        
+        updateUserPlacePreference.mutate({
+            userProfileId: 1,
+            preferences: preferences
+        })
     }
 
     const selectedPlaceTypes = watch('placeTypes')
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} style={{textAlign:'center'}}>
+        <form onSubmit={handleSubmit(onUpdateUserPlacePreferences)} style={{textAlign:'center'}}>
             <h1>Select Your Favourite Types (at least 5)</h1>
             <Controller 
                 name='placeTypes'
