@@ -33,6 +33,12 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               Browse Places
             </Link>
             <Link
+              to="/recommendations"
+              style={{ margin: "0 10px", textDecoration: "none" }}
+            >
+              Recommendations
+            </Link>
+            <Link
               to="/contact"
               style={{ margin: "0 10px", textDecoration: "none" }}
             >
