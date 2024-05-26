@@ -3,11 +3,12 @@ import { MutateOptions, useMutation } from "@tanstack/react-query";
 import {
   requestPlaceRecommendations,
   pollPlaceRecommendations,
+  TResponse,
 } from "@/api/recommendation";
 import {
   IPlaceRecommendationRequest,
   IPlaceRecommendationResponse,
-} from "@/pages/places.page/interface";
+} from "@/pages/recommendations.page/interface";
 
 export const useRequestPlaceRecommendationsMutation = (
   options?: MutateOptions
