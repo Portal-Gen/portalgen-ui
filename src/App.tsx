@@ -2,8 +2,9 @@ import React, { Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import AppLayout from "./shared/components/layout/app-layout";
 import QuestionnairePage from "./pages/questionnaire.page";
-import PlaceRecommendations from "./pages/places.page";
+import PlaceRecommendations from "./pages/recommendations.page";
 import PlaceDetails from "./pages/place-details.page";
+import PlacesPage from "./pages/places.page";
 
 const AppRoutes = () => {
   return (
@@ -11,7 +12,9 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<QuestionnairePage />} />
 
-        <Route path="/places" element={<PlaceRecommendations />} />
+        <Route path="/places" element={<PlacesPage />} />
+
+        <Route path="/recommendations" element={<PlaceRecommendations />} />
 
         <Route path="/place/:id" element={<PlaceDetails />} />
 
