@@ -1,6 +1,9 @@
 import { MutateOptions, useMutation } from "@tanstack/react-query";
 
-import { updateUserPlacePreferences } from "@/api/user";
+import {
+  calibrateUserPlacePreferences,
+  updateUserPlacePreferences,
+} from "@/api/user";
 
 export const useUpdateUserPlacePreferencesMutation = (
   options?: MutateOptions
@@ -8,6 +11,16 @@ export const useUpdateUserPlacePreferencesMutation = (
   return useMutation({
     mutationKey: [updateUserPlacePreferences.name],
     mutationFn: updateUserPlacePreferences.fn,
+    ...options,
+  });
+};
+
+export const useCalibrateUserPlacePreferencesMutation = (
+  options?: MutateOptions
+) => {
+  return useMutation({
+    mutationKey: [calibrateUserPlacePreferences.name],
+    mutationFn: calibrateUserPlacePreferences.fn,
     ...options,
   });
 };
