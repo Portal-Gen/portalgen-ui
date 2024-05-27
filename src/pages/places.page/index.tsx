@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const PlacesPage = () => {
   const { data: places, isLoading } =
-    useGetPlacesByWorldCityIdQuery(1704933464);
+    useGetPlacesByWorldCityIdQuery(1036533631);
 
   if (isLoading) return <div>Loading...</div>;
 
