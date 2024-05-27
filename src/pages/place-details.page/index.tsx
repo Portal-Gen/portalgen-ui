@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Card, Text, Title, Divider, Group } from "@mantine/core";
 import { useParams } from "react-router-dom";
 import { useGetPlaceByIdQuery } from "@/api/hooks/place.hook";
+import { useCalibrateUserPlacePreferencesMutation } from "@/api/hooks/user.hook";
+import { WEBSITE_ACTIVITY_TYPE } from "@/shared/enums/biz.enum";
 
 const PlaceDetails = () => {
   const { id } = useParams(); // Access the ID passed in the URL
   // Fetch the place details using the ID
   const { data: place, isLoading } = useGetPlaceByIdQuery(id);
+
+  const calibrateUserPlacePreference = useCalibrateUserPlacePreferencesMutation(
+    {
+      onSuccess: () => {
+        console.log("Calibrated user place preferences");
+      },
+
+      onError: (error) => {
+        console.error("Failed to calibrate user place preferences", error);
+      },
+    }
+  );
+
+  useEffect(() => {
+    calibrateUserPlacePreference.mutate({
+      userProfileId: 1,
+      placeId: id,
+      activityType: WEBSITE_ACTIVITY_TYPE.VIEW_OR_CLICK_CONTENT,
+    });
+  }, []);
 
   if (isLoading) {
     return <p>Loading...</p>;
