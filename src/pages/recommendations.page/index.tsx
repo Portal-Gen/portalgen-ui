@@ -49,7 +49,7 @@ const PlaceRecommendations = () => {
           setTimeout(() => {
             pollPlaceRecommendationsMutation.mutate({
               userProfileId: 1,
-              worldCityId: 1704933464,
+              worldCityId: 1704413791,
             });
             setPollCount((prev) => prev + 1);
           }, 3000); // Adjust polling interval as needed
@@ -79,12 +79,12 @@ const PlaceRecommendations = () => {
     const { city, country } = formData;
 
     requestPlaceRecommendationsMutation.mutate(
-      { userProfileId, worldCityId: 1704933464 }, // Use correct IDs from formData if necessary
+      { userProfileId, worldCityId: 1704413791 }, // Use correct IDs from formData if necessary
       {
         onSuccess: () => {
           pollPlaceRecommendationsMutation.mutate({
             userProfileId,
-            worldCityId: 1704933464,
+            worldCityId: 1704413791,
           });
         },
         onError: (error) => {
